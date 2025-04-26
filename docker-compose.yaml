@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      context: ./docker/php
+    container_name: insider-php
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./api:/var/www
+    networks:
+      - insider-network
+    depends_on:
+      - postgres
+      - redis
+
+  nginx:
+    image: nginx:latest
+    container_name: insider-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./api:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - insider-network
+
+  node:
+    image: node:20
+    container_name: insider-node
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    command: sh -c "npm install && npm run dev -- --host"
+    ports:
+      - "80:5173"
+    environment:
+      - HOST=0.0.0.0
+    networks:
+      - insider-network
+
+  postgres:
+    image: postgres:15
+    container_name: insider-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: insider
+      POSTGRES_PASSWORD: insider
+      POSTGRES_DB: insider_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - insider-network
+
+  redis:
+    image: redis:latest
+    container_name: insider-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - insider-network
+
+networks:
+  insider-network:
+    driver: bridge
+
+volumes:
+  postgres-data:

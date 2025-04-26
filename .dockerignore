@@ -1,0 +1,13 @@
+node_modules
+vendor
+.env
+*.log
+npm-debug.log
+yarn-error.log
+docker-compose.override.yml
+.dockerignore
+.git
+.gitignore
+.idea
+.vscode
+*.md
