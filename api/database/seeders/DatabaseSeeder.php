@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Services\FixtureService;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +13,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            TeamSeeder::class
+            TeamSeeder::class,
+            StageSeeder::class
         ]);
+
+        (new FixtureService())->generate();
+
+        exit();
     }
 }
