@@ -3,10 +3,9 @@
 namespace App\Http\Resources\Fixture;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\StageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FixtureResource extends JsonResource
+class FixtureGroupResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,11 +16,10 @@ class FixtureResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'week' => $this->week,
-            'created_at' => $this->created_at,
-            'stage' => $this->whenLoaded('stage', function () {
-                return $this->stage ? StageResource::make($this->stage) : null;
-            })
+            'name' => $this->name,
+            'teams' => $this->whenLoaded('teams', function () {
+                return $this->teams ? FixtureGroupTeamResource::collection($this->teams) : null;
+            }),
         ];
     }
 }
