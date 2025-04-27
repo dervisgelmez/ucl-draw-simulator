@@ -27,7 +27,13 @@ export const useFixtureStore = defineStore('fixture', () => {
 
   const resetFixture = async () => {
     await useApiRequest().request(`/fixtures/${fixture.value?.id}`, { method: 'DELETE' })
+    resetStore()
+  }
+
+  const resetStore = () => {
     fixture.value = null
+    fixtureGroups.value = []
+    fixtureMatches.value = []
   }
 
   return {
