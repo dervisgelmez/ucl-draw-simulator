@@ -4,7 +4,7 @@
 
     <div class="flex flex-col flex-1">
       <AppHeader class="h-auto px-10 shrink-0" />
-      <main class="flex-1 my-5 px-10 overflow-y-auto">
+      <main class="flex-1 pb-20 px-10 overflow-y-auto">
         <RouterView />
       </main>
     </div>
