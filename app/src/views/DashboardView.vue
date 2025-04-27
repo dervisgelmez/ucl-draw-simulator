@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FixtureDashboard v-if="fixture" />
+    <FixtureDashboard v-if="fixture" :fixture="fixture" />
     <FixtureGenerate v-else />
   </div>
 </template>
