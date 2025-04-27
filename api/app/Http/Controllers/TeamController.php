@@ -15,7 +15,7 @@ class TeamController extends Controller
      */
     public function index(): JsonResponse
     {
-        $teams = Team::query()->get();
+        $teams = Team::query()->with(['stats'])->orderBy('name')->get();
 
         return Response::success(
             TeamResource::collection($teams)
@@ -33,9 +33,13 @@ class TeamController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Team $team)
+    public function show(Team $team): JsonResponse
     {
-        //
+        $team->load(['stats']);
+
+        return Response::success(
+            TeamResource::make($team)
+        );
     }
 
     /**

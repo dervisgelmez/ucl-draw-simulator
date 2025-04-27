@@ -19,7 +19,10 @@ class TeamResource extends JsonResource
             'logo' => $this->logo,
             'country' => $this->country,
             'name' => $this->name,
-            'color' => $this->main_color
+            'color' => $this->main_color,
+            'stats' => $this->whenLoaded('stats', function () {
+                return $this->stats ? TeamStatResource::make($this->stats) : null;
+            }),
         ];
     }
 }
