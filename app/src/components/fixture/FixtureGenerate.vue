@@ -1,7 +1,18 @@
 <template>
   <NSpin :show="loading">
-    <div class="flex flex-col w-6/12 gap-10 mx-auto">
-      <div class="grid grid-cols-8">
+    <div class="flex flex-col w-12/12 xl:w-6/12 gap-10 mx-auto">
+      <div class="text-center">
+        <p class="text-gray-500">There is no fixture yet. Would you like to create one?</p>
+        <button
+          @click="generateFixture"
+          type="button"
+          class="text-indigo-800 border border-indigo-800 hover:bg-indigo-800 hover:text-white rounded-lg cursor-pointer font-bold mt-2 px-3 py-2"
+        >
+          Generate Fixture
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8">
         <div
           v-for="team in teams"
           :key="team.id"
@@ -9,17 +20,6 @@
         >
           <img class="h-12" :src="team.logo" :alt="team.name" />
         </div>
-      </div>
-
-      <div class="text-center">
-        <p class="text-gray-500">There is no fixture yet. Would you like to create one?</p>
-        <p
-          @click="generateFixture"
-          type="button"
-          class="text-indigo-800 cursor-pointer text-base font-bold py-3"
-        >
-          Generate Fixture
-        </p>
       </div>
     </div>
   </NSpin>
@@ -40,7 +40,7 @@ const { teams } = storeToRefs(useTeamStore())
 const { request, loading } = useApiRequest()
 
 const generateFixture = async () => {
-  await request('api/fixtures', { method: 'POST' })
+  await request('/fixtures', { method: 'POST' })
   await fetchFixture()
 }
 

@@ -13,8 +13,10 @@ export function useApiRequest<T = never>() {
     data.value = null
     message.value = null
 
+    url = `/api${url}`
+
     try {
-      const { data: axiosData, status: axiosStatus } = await axios<ApiResponse>({ url, ...config })
+      const { data: axiosData, status: axiosStatus } = await axios<ApiResponse>({url, ...config })
       if (axiosStatus >= 200 && axiosStatus < 300 && axiosData.success) {
         if (axiosData.data === null) {
           state.value = ApiStates.EMPTY

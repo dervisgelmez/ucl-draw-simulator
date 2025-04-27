@@ -15,7 +15,7 @@ export const useTeamStore = defineStore('team', () => {
       return;
     }
 
-    const { data } = await useApiRequest().request('api/teams', { method: 'GET' })
+    const { data } = await useApiRequest().request('/teams', { method: 'GET' })
     teams.value = (data.value ?? []) as Team[]
   }
 
