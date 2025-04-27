@@ -2,9 +2,9 @@
   <div class="flex min-h-screen h-screen overflow-hidden">
     <AppSidebar />
 
-    <div class="flex flex-col flex-1 px-10">
-      <AppHeader class="h-auto shrink-0" />
-      <main class="flex-1 my-5 overflow-y-auto">
+    <div class="flex flex-col flex-1">
+      <AppHeader class="h-auto px-10 shrink-0" />
+      <main class="flex-1 my-5 px-10 overflow-y-auto">
         <RouterView />
       </main>
     </div>
