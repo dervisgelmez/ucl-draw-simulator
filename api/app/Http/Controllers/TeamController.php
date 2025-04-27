@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Team\TeamResource;
 use App\Models\Team;
 use App\Supports\Response;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Http\Resources\Team\TeamResource;
 
 class TeamController extends Controller
 {
@@ -15,19 +14,11 @@ class TeamController extends Controller
      */
     public function index(): JsonResponse
     {
-        $teams = Team::query()->with(['stats'])->orderBy('name')->get();
+        $teams = Team::getActiveTeams();
 
         return Response::success(
             TeamResource::collection($teams)
         );
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -40,21 +31,5 @@ class TeamController extends Controller
         return Response::success(
             TeamResource::make($team)
         );
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Team $team)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Team $team)
-    {
-        //
     }
 }

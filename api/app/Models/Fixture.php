@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[ObservedBy([FixtureObserver::class])]
@@ -17,6 +18,11 @@ class Fixture extends Model
 
     protected $guarded = [];
 
+    public function stage(): HasOne
+    {
+        return $this->hasOne(Stage::class, 'id', 'stage_id');
+    }
+
     public function groups(): HasMany
     {
         return $this->hasMany(FixtureGroup::class);
@@ -24,6 +30,9 @@ class Fixture extends Model
 
     public static function findOneByActive()
     {
-        return Fixture::query()->orderByDesc('created_at')->first();
+        return Fixture::query()
+            ->with(['stage'])
+            ->orderByDesc('created_at')
+            ->first();
     }
 }

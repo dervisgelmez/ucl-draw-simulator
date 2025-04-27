@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum FixtureStageEnum: string
+enum StageEnum: string
 {
     case GROUP_STAGE = 'group_stage';
     case ROUND_OF_16 = 'round_of_16';
