@@ -28,6 +28,11 @@ class Fixture extends Model
         return $this->hasMany(FixtureGroup::class);
     }
 
+    public function matches(): HasMany
+    {
+        return $this->hasMany(FixtureMatch::class);
+    }
+
     public static function findOneByActive()
     {
         return Fixture::query()
