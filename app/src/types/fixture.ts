@@ -3,6 +3,7 @@ import type { Team } from '@/types/teams.ts'
 export interface Fixture {
   id: string;
   name: string;
+  week: number;
   stage: FixtureStage;
 }
 
@@ -13,10 +14,28 @@ export interface FixtureStage {
   isFinal: boolean;
 }
 
+export interface FixtureGroupTeam {
+  id: string;
+  name: string;
+  country: string;
+  logo: string;
+  color: string;
+  attributes: {
+    played: number;
+    win: number;
+    lose: number;
+    draw: number;
+    points: number;
+    scored: number;
+    conceded: number;
+    average: number;
+  }
+}
+
 export interface FixtureGroup {
   id: string;
   name: string;
-  teams: Team[];
+  teams: FixtureGroupTeam[];
 }
 
 export interface FixtureMatch {

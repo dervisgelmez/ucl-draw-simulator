@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-between items-center w-full border border-gray-200 shadow-lg rounded-lg"
+    class="flex justify-between items-center w-full border border-gray-200 rounded-lg overflow-hidden"
   >
     <div
       class="flex w-full gap-5 items-center justify-start p-2 rounded border-l-10"
@@ -9,7 +9,7 @@
       }"
     >
       <img class="w-8 h-8" :src="match.homeTeam.logo" :alt="match.homeTeam.name" />
-      <span class="text-base font-bold">{{ match.homeTeam.name }}</span>
+      <span class="text-xs font-bold">{{ match.homeTeam.name }}</span>
     </div>
     <div class="w-full text-center">
       <div v-if="match.completedAt">
@@ -22,12 +22,12 @@
     </div>
 
     <div
-      class="flex w-full gap-5 items-center justify-end p-2 rounded border-r-10"
+      class="flex w-full gap-5 items-center justify-end text-right p-2 rounded border-r-10"
       :style="{
         borderColor: match.awayTeam.color,
       }"
     >
-      <span class="text-base font-bold">{{ match.awayTeam.name }}</span>
+      <span class="text-xs font-bold">{{ match.awayTeam.name }}</span>
       <img class="w-8 h-8" :src="match.awayTeam.logo" :alt="match.awayTeam.name" />
     </div>
   </div>
