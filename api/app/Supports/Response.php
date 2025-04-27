@@ -2,6 +2,7 @@
 
 namespace App\Supports;
 
+use App\Enums\ResponseStatusEnum;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -9,30 +10,30 @@ class Response
 {
     /**
      * @param mixed|null $data
-     * @param int $status
+     * @param ResponseStatusEnum $status
      * @param string|null $message
      * @return JsonResponse
      */
     public static function success(
         mixed $data = null,
-        int $status = 200,
+        ResponseStatusEnum $status = ResponseStatusEnum::OK,
         ?string $message = null
     ): JsonResponse
     {
-        return response()->success($data, $status, $message);
+        return response()->success($data, $status->value, $message);
     }
 
     /**
      * @param string $errorMessage
-     * @param int $status
+     * @param ResponseStatusEnum $status
      * @return JsonResponse
      */
     public static function error(
         string $errorMessage = 'error.unprocessable',
-        int $status = 200
+        ResponseStatusEnum $status = ResponseStatusEnum::BAD_REQUEST,
     ): JsonResponse
     {
-        return response()->error($errorMessage, $status)->send();
+        return response()->error($errorMessage, $status->value)->send();
     }
 
     /**
