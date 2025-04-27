@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Fixture;
 
-use App\Models\Team;
 use App\Models\Fixture;
+use App\Models\Team;
 use App\Utils\FixtureUtils;
 use Illuminate\Support\Facades\DB;
 

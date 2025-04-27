@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Fixture;
 
 use App\Enums\ResponseStatusEnum;
-use App\Services\FixtureService;
+use App\Http\Controllers\Controller;
+use App\Services\Fixture\FixtureService;
 use App\Supports\Response;
 use Illuminate\Http\JsonResponse;
 

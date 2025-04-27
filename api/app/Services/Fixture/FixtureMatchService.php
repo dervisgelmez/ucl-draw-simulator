@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Fixture;
 
-use Carbon\Carbon;
-use App\Models\Team;
 use App\Models\Fixture;
-use Carbon\CarbonInterface;
 use App\Models\FixtureMatch;
+use App\Models\Team;
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
 
 class FixtureMatchService
 {

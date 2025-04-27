@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Team;
 
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Team\TeamResource;
 use App\Models\Team;
 use App\Supports\Response;
 use Illuminate\Http\JsonResponse;
-use App\Http\Resources\Team\TeamResource;
 
 class TeamController extends Controller
 {

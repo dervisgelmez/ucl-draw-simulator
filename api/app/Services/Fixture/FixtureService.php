@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Fixture;
 
-use Carbon\Carbon;
-use App\Models\Stage;
-use App\Models\Fixture;
-use Illuminate\Support\Facades\DB;
 use App\Http\Resources\Fixture\FixtureResource;
+use App\Models\Fixture;
+use App\Models\Stage;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class FixtureService
 {

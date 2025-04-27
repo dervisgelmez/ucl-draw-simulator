@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Fixture;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\Fixture\FixtureMatchResource;
 use App\Models\Fixture;
 use App\Supports\Response;
