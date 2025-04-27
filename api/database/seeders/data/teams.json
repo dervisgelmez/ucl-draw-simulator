@@ -18,7 +18,8 @@
         "winner_mentality": 10,
         "loser_mentality": 9,
         "star_players_count": 6,
-        "manager_influence": 9
+        "manager_influence": 9,
+        "pot": 1
     },
     {
         "team_name": "Manchester United",
@@ -39,7 +40,8 @@
         "winner_mentality": 9,
         "loser_mentality": 8,
         "star_players_count": 5,
-        "manager_influence": 8
+        "manager_influence": 8,
+        "pot": 2
     },
     {
         "team_name": "Copenhagen",
@@ -60,7 +62,8 @@
         "winner_mentality": 6,
         "loser_mentality": 5,
         "star_players_count": 2,
-        "manager_influence": 7
+        "manager_influence": 7,
+        "pot": 2
     },
     {
         "team_name": "Galatasaray",
@@ -81,7 +84,8 @@
         "winner_mentality": 8,
         "loser_mentality": 7,
         "star_players_count": 4,
-        "manager_influence": 8
+        "manager_influence": 8,
+        "pot": 1
     },
     {
         "team_name": "Sevilla",
@@ -102,7 +106,8 @@
         "winner_mentality": 7,
         "loser_mentality": 6,
         "star_players_count": 3,
-        "manager_influence": 8
+        "manager_influence": 8,
+        "pot": 3
     },
     {
         "team_name": "Arsenal",
@@ -123,7 +128,8 @@
         "winner_mentality": 8,
         "loser_mentality": 8,
         "star_players_count": 5,
-        "manager_influence": 9
+        "manager_influence": 9,
+        "pot": 1
     },
     {
         "team_name": "PSV Eindhoven",
@@ -144,7 +150,8 @@
         "winner_mentality": 7,
         "loser_mentality": 6,
         "star_players_count": 3,
-        "manager_influence": 7
+        "manager_influence": 7,
+        "pot": 4
     },
     {
         "team_name": "Lens",
@@ -165,7 +172,8 @@
         "winner_mentality": 6,
         "loser_mentality": 5,
         "star_players_count": 2,
-        "manager_influence": 6
+        "manager_influence": 6,
+        "pot": 4
     },
     {
         "team_name": "Napoli",
@@ -186,7 +194,8 @@
         "winner_mentality": 9,
         "loser_mentality": 7,
         "star_players_count": 4,
-        "manager_influence": 8
+        "manager_influence": 8,
+        "pot": 4
     },
     {
         "team_name": "Real Madrid",
@@ -207,7 +216,8 @@
         "winner_mentality": 10,
         "loser_mentality": 9,
         "star_players_count": 7,
-        "manager_influence": 10
+        "manager_influence": 10,
+        "pot": 1
     },
     {
         "team_name": "Braga",
@@ -228,7 +238,8 @@
         "winner_mentality": 6,
         "loser_mentality": 5,
         "star_players_count": 2,
-        "manager_influence": 6
+        "manager_influence": 6,
+        "pot": 3
     },
     {
         "team_name": "Union Berlin",
@@ -249,7 +260,8 @@
         "winner_mentality": 6,
         "loser_mentality": 5,
         "star_players_count": 2,
-        "manager_influence": 7
+        "manager_influence": 7,
+        "pot": 3
     },
     {
         "team_name": "Benfica",
@@ -270,7 +282,8 @@
         "winner_mentality": 8,
         "loser_mentality": 7,
         "star_players_count": 4,
-        "manager_influence": 8
+        "manager_influence": 8,
+        "pot": 3
     },
     {
         "team_name": "Inter",
@@ -291,7 +304,8 @@
         "winner_mentality": 9,
         "loser_mentality": 8,
         "star_players_count": 5,
-        "manager_influence": 9
+        "manager_influence": 9,
+        "pot": 1
     },
     {
         "team_name": "Red Bull Salzburg",
@@ -312,7 +326,8 @@
         "winner_mentality": 7,
         "loser_mentality": 6,
         "star_players_count": 3,
-        "manager_influence": 7
+        "manager_influence": 7,
+        "pot": 2
     },
     {
         "team_name": "Real Sociedad",
@@ -333,7 +348,8 @@
         "winner_mentality": 7,
         "loser_mentality": 6,
         "star_players_count": 3,
-        "manager_influence": 8
+        "manager_influence": 8,
+        "pot": 4
     },
     {
         "team_name": "Feyenoord",
@@ -354,7 +370,8 @@
         "winner_mentality": 8,
         "loser_mentality": 7,
         "star_players_count": 4,
-        "manager_influence": 8
+        "manager_influence": 8,
+        "pot": 3
     },
     {
         "team_name": "Atlético Madrid",
@@ -375,7 +392,8 @@
         "winner_mentality": 9,
         "loser_mentality": 8,
         "star_players_count": 4,
-        "manager_influence": 9
+        "manager_influence": 9,
+        "pot": 2
     },
     {
         "team_name": "Lazio",
@@ -396,7 +414,8 @@
         "winner_mentality": 7,
         "loser_mentality": 6,
         "star_players_count": 3,
-        "manager_influence": 8
+        "manager_influence": 8,
+        "pot": 2
     },
     {
         "team_name": "Celtic",
@@ -417,7 +436,8 @@
         "winner_mentality": 7,
         "loser_mentality": 6,
         "star_players_count": 3,
-        "manager_influence": 7
+        "manager_influence": 7,
+        "pot": 4
     },
     {
         "team_name": "Paris Saint-Germain",
@@ -438,7 +458,8 @@
         "winner_mentality": 9,
         "loser_mentality": 8,
         "star_players_count": 6,
-        "manager_influence": 9
+        "manager_influence": 9,
+        "pot": 1
     },
     {
         "team_name": "Borussia Dortmund",
@@ -459,7 +480,8 @@
         "winner_mentality": 8,
         "loser_mentality": 7,
         "star_players_count": 5,
-        "manager_influence": 8
+        "manager_influence": 8,
+        "pot": 2
     },
     {
         "team_name": "AC Milan",
@@ -480,7 +502,8 @@
         "winner_mentality": 8,
         "loser_mentality": 7,
         "star_players_count": 5,
-        "manager_influence": 8
+        "manager_influence": 8,
+        "pot": 2
     },
     {
         "team_name": "Newcastle United",
@@ -501,7 +524,8 @@
         "winner_mentality": 7,
         "loser_mentality": 6,
         "star_players_count": 4,
-        "manager_influence": 7
+        "manager_influence": 7,
+        "pot": 3
     },
     {
         "team_name": "Manchester City",
@@ -522,7 +546,8 @@
         "winner_mentality": 10,
         "loser_mentality": 9,
         "star_players_count": 6,
-        "manager_influence": 10
+        "manager_influence": 10,
+        "pot": 1
     },
     {
         "team_name": "RB Leipzig",
@@ -543,7 +568,8 @@
         "winner_mentality": 7,
         "loser_mentality": 6,
         "star_players_count": 3,
-        "manager_influence": 7
+        "manager_influence": 7,
+        "pot": 3
     },
     {
         "team_name": "Fenerbahçe",
@@ -564,7 +590,8 @@
         "winner_mentality": 8,
         "loser_mentality": 5,
         "star_players_count": 5,
-        "manager_influence": 8
+        "manager_influence": 8,
+        "pot": 2
     },
     {
         "team_name": "Young Boys",
@@ -585,7 +612,8 @@
         "winner_mentality": 7,
         "loser_mentality": 6,
         "star_players_count": 3,
-        "manager_influence": 7
+        "manager_influence": 7,
+        "pot": 4
     },
     {
         "team_name": "Barcelona",
@@ -606,7 +634,8 @@
         "winner_mentality": 10,
         "loser_mentality": 9,
         "star_players_count": 6,
-        "manager_influence": 10
+        "manager_influence": 10,
+        "pot": 1
     },
     {
         "team_name": "Porto",
@@ -627,7 +656,8 @@
         "winner_mentality": 7,
         "loser_mentality": 6,
         "star_players_count": 3,
-        "manager_influence": 7
+        "manager_influence": 7,
+        "pot": 3
     },
     {
         "team_name": "Beşiktaş",
@@ -648,7 +678,8 @@
         "winner_mentality": 7,
         "loser_mentality": 5,
         "star_players_count": 4,
-        "manager_influence": 7
+        "manager_influence": 7,
+        "pot": 4
     },
     {
         "team_name": "Trabzonspor",
@@ -669,6 +700,7 @@
         "winner_mentality": 7,
         "loser_mentality": 5,
         "star_players_count": 3,
-        "manager_influence": 7
+        "manager_influence": 7,
+        "pot": 4
     }
 ]

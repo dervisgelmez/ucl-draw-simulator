@@ -20,6 +20,7 @@ class TeamResource extends JsonResource
             'country' => $this->country,
             'name' => $this->name,
             'color' => $this->main_color,
+            'pot' => $this->pot,
             'stats' => $this->whenLoaded('stats', function () {
                 return $this->stats ? TeamStatResource::make($this->stats) : null;
             }),

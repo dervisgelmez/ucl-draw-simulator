@@ -16,6 +16,8 @@ class TeamSeeder extends Seeder
         $json = File::get(database_path('seeders/data/teams.json'));
 
         $data = json_decode($json, true);
+
+
         foreach ($data as $t) {
             $team = Team::query()->updateOrCreate(
                 [
@@ -26,6 +28,7 @@ class TeamSeeder extends Seeder
                     'main_color' => $t['main_color'],
                     'country' => $t['country'],
                     'logo' => $t['team_logo'],
+                    'pot' => $t['pot']
                 ]
             );
 
@@ -50,6 +53,7 @@ class TeamSeeder extends Seeder
                     'star_players_count' => $t['star_players_count'],
                     'manager_influence' => $t['manager_influence'],
                 ]);
+
         }
     }
 }

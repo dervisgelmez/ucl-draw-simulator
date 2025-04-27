@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('main_color', 7);
             $table->string('country');
             $table->string('logo');
+            $table->tinyInteger('pot');
             $table->timestamps();
         });
     }
