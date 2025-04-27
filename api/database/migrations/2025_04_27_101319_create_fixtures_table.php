@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('fixtures', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignId('stage_id')->constrained('stages');
+            $table->tinyInteger('week');
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();
