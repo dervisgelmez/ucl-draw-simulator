@@ -1,20 +1,17 @@
 <template>
-  <n-data-table :loading="loading" :columns="columns" :data="createData" />
+  <n-data-table :columns="columns" :data="createData" />
 </template>
 
 <script setup lang="ts">
 import type { DataTableColumns } from 'naive-ui'
 import { NDataTable } from 'naive-ui'
 import { computed, h, onMounted } from 'vue'
-import { useApiRequest } from '@/composables/useApiRequest.ts'
 import type { Team } from '@/types/teams.ts'
-import { useTeamStore } from '@/stores/team.ts'
+import { useTeamStore } from '@/stores/team.store.ts'
 import { storeToRefs } from 'pinia'
 
-const { setTeams } = useTeamStore()
+const { fetchTeams } = useTeamStore()
 const { teams } = storeToRefs(useTeamStore())
-
-const { data: fetchedTeams, request, loading } = useApiRequest<Array<Team>>()
 
 const columns: DataTableColumns<Team> = [
   {
@@ -27,7 +24,7 @@ const columns: DataTableColumns<Team> = [
           alt: row.name,
           class: 'w-10 h-10 object-contain',
         }),
-        h('span', row.name),
+        h('b', row.name),
       ])
     },
   },
@@ -35,12 +32,34 @@ const columns: DataTableColumns<Team> = [
     title: 'Country',
     key: 'country',
   },
-  { title: 'Attack', key: 'stats.attack' },
-  { title: 'Midfield', key: 'stats.midfield' },
-  { title: 'Defense', key: 'stats.defense' },
-  { title: 'Speed', key: 'stats.speed' },
-  { title: 'Pass', key: 'stats.pass' },
-  { title: 'Shot', key: 'stats.shot' },
+  {
+    title: 'Pot',
+    key: 'pot',
+  },
+  {
+    title: 'Attack',
+    key: 'stats.attack',
+  },
+  {
+    title: 'Midfield',
+    key: 'stats.midfield',
+  },
+  {
+    title: 'Defense',
+    key: 'stats.defense',
+  },
+  {
+    title: 'Speed',
+    key: 'stats.speed',
+  },
+  {
+    title: 'Pass',
+    key: 'stats.pass',
+  },
+  {
+    title: 'Shot',
+    key: 'stats.shot',
+  }
 ]
 
 const createData = computed(() => {
@@ -54,8 +73,6 @@ onMounted(async () => {
   if (teams.value.length > 0) {
     return
   }
-
-  await request('api/teams', { method: 'GET' })
-  setTeams(fetchedTeams.value || [])
+  await fetchTeams()
 })
 </script>

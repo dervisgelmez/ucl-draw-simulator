@@ -30,6 +30,14 @@ export function useApiRequest<T = never>() {
       state.value = ApiStates.ERROR
       console.log(`An error occurred while fetching data:\n ${err}`)
     }
+
+    return {
+      data,
+      loading,
+      success,
+      empty,
+      error,
+    }
   }
 
   const loading = computed<boolean>(() => state.value === ApiStates.LOADING)
@@ -49,6 +57,6 @@ export function useApiRequest<T = never>() {
     error,
 
     // Methods
-    request
+    request,
   }
 }

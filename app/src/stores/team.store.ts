@@ -1,0 +1,23 @@
+import { defineStore } from 'pinia'
+import type { Team } from '@/types/teams'
+import { ref } from 'vue'
+import { useApiRequest } from '@/composables/useApiRequest.ts'
+
+export const useTeamStore = defineStore('team', () => {
+  const teams = ref<Array<Team>>([] as Team[])
+
+  const setTeams = (data: Team[]) => {
+    teams.value = data
+  }
+
+  const fetchTeams = async () => {
+    const { data } = await useApiRequest().request('api/teams', { method: 'GET' })
+    teams.value = (data.value ?? []) as Team[]
+  }
+
+  return {
+    teams,
+    setTeams,
+    fetchTeams
+  }
+})
