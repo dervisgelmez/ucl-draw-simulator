@@ -2,15 +2,22 @@
 
 namespace App\Services\Simulate;
 
-use App\Models\FixtureMatch;
 use App\Models\Fixture;
+use App\Models\FixtureMatch;
 
 abstract class AbstractSimulateStrategy implements SimulateStrategy
 {
-    abstract public function handle(Fixture $fixture);
+    protected SimulateService $simulateService;
 
-    protected function handleMatch(FixtureMatch $match): array
+    public function __construct()
     {
-        // TODO: Calculate match results
+        $this->simulateService = new SimulateService();
     }
+
+    protected function simulate(FixtureMatch $match): void
+    {
+        $this->simulateService->simulateMatch($match);
+    }
+
+    abstract public function handle(Fixture $fixture);
 }
