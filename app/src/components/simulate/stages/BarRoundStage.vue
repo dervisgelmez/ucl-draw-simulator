@@ -27,11 +27,6 @@ const applySimulate = async () => {
   await fetchFixtureMatches()
 }
 
-const simulateWeeks = async () => {
-  await request(`/simulate/${props.fixture.id}/weeks`, { method: 'POST' })
-  await applySimulate()
-}
-
 const simulateWeek = async () => {
   await request(`/simulate/${props.fixture.id}/week`, { method: 'POST' })
   await applySimulate()

@@ -1,6 +1,6 @@
 <template>
   <div
-    @click="simulateWeek"
+    @click="simulateWeeks"
     type="button"
     class="flex items-center gap-1 text-indigo-600 cursor-pointer text-base border-gray-200 pr-3"
   >
@@ -9,7 +9,7 @@
   </div>
 
   <div
-    @click="simulateWeeks"
+    @click="simulateGroup"
     type="button"
     class="flex items-center gap-1 text-indigo-600 cursor-pointer text-base border-gray-200 pr-3"
   >
@@ -37,12 +37,12 @@ const applySimulate = async () => {
 }
 
 const simulateWeeks = async () => {
-  await request(`/simulate/${props.fixture.id}/weeks`, { method: 'POST' })
+  await request(`/fixtures/${props.fixture.id}/simulate/weekly`, { method: 'POST' })
   await applySimulate()
 }
 
-const simulateWeek = async () => {
-  await request(`/simulate/${props.fixture.id}/week`, { method: 'POST' })
+const simulateGroup = async () => {
+  await request(`/fixtures/${props.fixture.id}/simulate/groups`, { method: 'POST' })
   await applySimulate()
 }
 </script>
