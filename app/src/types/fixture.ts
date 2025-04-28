@@ -51,7 +51,8 @@ export interface FixtureMatch {
 }
 
 export interface IFixtureStageComponentsProps {
-  fixture: Fixture
+  fixture: Fixture,
+  clear?: boolean
 }
 
 export enum FixtureStages {

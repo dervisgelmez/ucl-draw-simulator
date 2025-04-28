@@ -67,6 +67,11 @@ export const useFixtureStore = defineStore('fixture', () => {
     resetFixtureMatches()
   }
 
+  const resetFixtureMatch = (stage: FixtureStages = FixtureStages.GROUP) => {
+    fixture.value = null
+    fixtureMatches.value[stage] = []
+  }
+
   const resetStore = () => {
     fixture.value = null
     fixtureGroups.value = []
@@ -92,6 +97,7 @@ export const useFixtureStore = defineStore('fixture', () => {
     fetchFixtureGroups,
     fetchFixtureMatches,
     resetFixture,
+    resetFixtureMatch,
     resetDashboard,
   }
 })
