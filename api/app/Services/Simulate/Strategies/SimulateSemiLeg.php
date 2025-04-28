@@ -5,7 +5,7 @@ namespace App\Services\Simulate\Strategies;
 use App\Models\Fixture;
 use App\Services\Simulate\AbstractSimulateStrategy;
 
-class SimulateWeekly extends AbstractSimulateStrategy
+class SimulateSemiLeg extends AbstractSimulateStrategy
 {
     public function handle(Fixture $fixture): void
     {
@@ -17,7 +17,7 @@ class SimulateWeekly extends AbstractSimulateStrategy
         $fixture->week++;
         $fixture->save();
 
-        if ($fixture->week === 7) {
+        if ($fixture->week === 13) {
             $this->next($fixture);
         }
     }

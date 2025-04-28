@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -34,5 +35,17 @@ class FixtureMatch extends Model
     public function logs(): HasMany
     {
         return $this->hasMany(FixtureMatchLog::class);
+    }
+
+    public static function findByStage(Fixture $fixture, string $stage): Collection
+    {
+        return $fixture
+            ->matches()
+            ->with(['stage', 'homeTeam', 'awayTeam'])
+            ->whereHas('stage', function ($query) use ($stage) {
+                $query->where('name', $stage);
+            })
+            ->orderBy('match_date')
+            ->get();
     }
 }

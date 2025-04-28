@@ -2,19 +2,15 @@
 
 namespace App\Models;
 
+use App\Enums\StageEnum;
 use Illuminate\Database\Eloquent\Model;
 
 class Stage extends Model
 {
     protected $guarded = [];
 
-    public static function findFirstStageId()
+    public static function findOneByEnum(StageEnum $enum)
     {
-        return Stage::query()->orderBy('order')->first()->id;
-    }
-
-    public static function findNextStageId(Stage $stage)
-    {
-        return Stage::query()->where('order', ($stage->order + 1))->first()->id;
+        return Stage::query()->where('order', $enum->order())->first();
     }
 }

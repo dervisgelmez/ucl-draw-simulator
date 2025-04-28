@@ -2,6 +2,7 @@
 
 namespace App\Services\Simulate;
 
+use App\Enums\StageEnum;
 use Carbon\Carbon;
 use App\Models\FixtureMatch;
 use App\Models\FixtureMatchLog;
@@ -43,27 +44,32 @@ class SimulateService
         $homeStats = $homeTeam->stats;
         $awayStats = $awayTeam->stats;
 
-        $homeScore = 0;
-        $awayScore = 0;
+        do {
+            $homeScore = 0;
+            $awayScore = 0;
 
-        for ($minute = 1; $minute <= 90; $minute++) {
-            if ($this->isEventOccurring()) {
-                $eventResult = $this->simulateEvent(
-                    $this->determineEventType(),
-                    $minute,
-                    $match,
-                    $homeTeam,
-                    $awayTeam,
-                    $homeStats,
-                    $awayStats
-                );
+            for ($minute = 1; $minute <= 90; $minute++) {
+                if ($this->isEventOccurring()) {
+                    $eventResult = $this->simulateEvent(
+                        $this->determineEventType(),
+                        $minute,
+                        $match,
+                        $homeTeam,
+                        $awayTeam,
+                        $homeStats,
+                        $awayStats
+                    );
 
-                if ($eventResult !== null) {
-                    $homeScore += $eventResult['home'] ?? 0;
-                    $awayScore += $eventResult['away'] ?? 0;
+                    if ($eventResult !== null) {
+                        $homeScore += $eventResult['home'] ?? 0;
+                        $awayScore += $eventResult['away'] ?? 0;
+                    }
                 }
             }
-        }
+        } while (
+            $match->stage->name === StageEnum::FINAL->value
+            && $homeScore === $awayScore
+        );
 
         $match->update([
             'home_score' => $homeScore,
@@ -99,7 +105,6 @@ class SimulateService
             default => SimulateEventTypeEnum::INJURY,
         };
     }
-
 
     protected function simulateEvent(
         SimulateEventTypeEnum $eventType,

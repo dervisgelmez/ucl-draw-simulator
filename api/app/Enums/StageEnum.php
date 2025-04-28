@@ -2,6 +2,14 @@
 
 namespace App\Enums;
 
+use App\Models\Stage;
+use App\Services\Fixture\Match\AbstractFixtureMatchService;
+use App\Services\Fixture\Match\Stages\FixtureFinalMatchService;
+use App\Services\Fixture\Match\Stages\FixtureGroupMatchService;
+use App\Services\Fixture\Match\Stages\FixtureQuarterMatchService;
+use App\Services\Fixture\Match\Stages\FixtureRoundMatchService;
+use App\Services\Fixture\Match\Stages\FixtureSemiMatchService;
+
 enum StageEnum: string
 {
     case GROUP_STAGE = 'group_stage';
@@ -9,6 +17,11 @@ enum StageEnum: string
     case QUARTER_FINAL = 'quarter_final';
     case SEMI_FINAL = 'semi_final';
     case FINAL = 'final';
+
+    public static function first(): StageEnum
+    {
+        return self::GROUP_STAGE;
+    }
 
     public function label(): string
     {
@@ -46,5 +59,32 @@ enum StageEnum: string
     public function isFinal(): bool
     {
         return $this === self::FINAL;
+    }
+
+    public function next(): ?StageEnum
+    {
+        return match ($this) {
+            self::GROUP_STAGE => self::ROUND_OF_16,
+            self::ROUND_OF_16 => self::QUARTER_FINAL,
+            self::QUARTER_FINAL => self::SEMI_FINAL,
+            self::SEMI_FINAL => self::FINAL,
+            self::FINAL => null
+        };
+    }
+
+    public function stage(): ?Stage
+    {
+        return Stage::findOneByEnum($this);
+    }
+
+    public function service(): AbstractFixtureMatchService
+    {
+        return match ($this) {
+            self::GROUP_STAGE => app(FixtureGroupMatchService::class),
+            self::ROUND_OF_16 => app(FixtureRoundMatchService::class),
+            self::QUARTER_FINAL => app(FixtureQuarterMatchService::class),
+            self::SEMI_FINAL => app(FixtureSemiMatchService::class),
+            self::FINAL => app(FixtureFinalMatchService::class)
+        };
     }
 }

@@ -5,21 +5,22 @@ namespace App\Http\Controllers\Fixture;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Fixture\FixtureMatchResource;
 use App\Models\Fixture;
+use App\Models\FixtureMatch;
 use App\Supports\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class FixtureMatchesController extends Controller
 {
     /**
      * Display active fixture
      */
-    public function index(Fixture $fixture): JsonResponse
+    public function index(Fixture $fixture, Request $request): JsonResponse
     {
-        $matches = $fixture
-            ->matches()
-            ->with(['stage', 'homeTeam', 'awayTeam'])
-            ->orderBy('match_date')
-            ->get();
+        $matches = FixtureMatch::findByStage(
+            $fixture,
+            $request->query->get('stage')
+        );
 
         return Response::success(
             FixtureMatchResource::collection($matches)

@@ -5,20 +5,18 @@ namespace App\Services\Simulate\Strategies;
 use App\Models\Fixture;
 use App\Services\Simulate\AbstractSimulateStrategy;
 
-class SimulateWeekly extends AbstractSimulateStrategy
+class SimulateGroup extends AbstractSimulateStrategy
 {
     public function handle(Fixture $fixture): void
     {
-        $matches = $fixture->weeklyWaitingMatches()->get();
+        $matches = $fixture->waitingMatches()->get();
         foreach ($matches as $match) {
             $this->simulate($match);
         }
 
-        $fixture->week++;
+        $fixture->week = 7;
         $fixture->save();
 
-        if ($fixture->week === 7) {
-            $this->next($fixture);
-        }
+        $this->next($fixture);
     }
 }

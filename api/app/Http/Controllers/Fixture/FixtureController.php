@@ -26,7 +26,7 @@ class FixtureController extends Controller
      */
     public function store(FixtureService $fixtureService): JsonResponse
     {
-        $fixtureService->generate();
+        $fixtureService->generateFixture();
 
         return Response::success(
             status: ResponseStatusEnum::CREATED

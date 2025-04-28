@@ -1,10 +1,12 @@
 <?php
 
+use App\Enums\StageEnum;
 use App\Http\Controllers\Fixture\FixtureController;
 use App\Http\Controllers\Fixture\FixtureGroupController;
 use App\Http\Controllers\Fixture\FixtureMatchesController;
 use App\Http\Controllers\Simulate\SimulateController;
 use App\Http\Controllers\Team\TeamController;
+use App\Models\Fixture;
 use Illuminate\Support\Facades\Route;
 
 Route::apiResource('/teams', TeamController::class)->only(['index', 'show']);
@@ -20,4 +22,11 @@ Route::prefix('/fixtures/{fixture}')->group(function () {
 
     Route::post('/simulate/{strategy}', [SimulateController::class, 'simulate'])
         ->name('fixtures.simulate');
+});
+
+
+Route::get('/test', function () {
+    StageEnum::SEMI_FINAL->service()->generate(
+        Fixture::findOneByActive()
+    );
 });

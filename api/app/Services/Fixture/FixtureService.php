@@ -2,11 +2,11 @@
 
 namespace App\Services\Fixture;
 
-use App\Http\Resources\Fixture\FixtureResource;
-use App\Models\Fixture;
-use App\Models\Stage;
 use Carbon\Carbon;
+use App\Models\Fixture;
+use App\Enums\StageEnum;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\Fixture\FixtureResource;
 
 class FixtureService
 {
@@ -24,7 +24,7 @@ class FixtureService
      * @return void
      * @throws \Throwable
      */
-    public function generate(): void
+    public function generateFixture(): void
     {
         retry(5, function () {
             DB::transaction(function () {
@@ -32,10 +32,12 @@ class FixtureService
                 Fixture::query()->delete();
 
                 $date = Carbon::now();
+                $stageEnum = StageEnum::first();
+
                 $fixture = Fixture::query()
                     ->create([
                         'name' => "Season {$date->format('Y')}",
-                        'stage_id' => Stage::findFirstStageId(),
+                        'stage_id' => $stageEnum->stage()->id,
                         'week' => 1
                     ]);
 
@@ -46,8 +48,23 @@ class FixtureService
                 FixtureGroupService::assignTeamsToFixtureGroups($fixture);
 
                 // Generate all matches for group teams
-                FixtureMatchService::generateGroupMatches($fixture);
+                $stageEnum->service()->generate($fixture);
             });
         });
+    }
+
+    public function simulateFixture(Fixture $fixture): void
+    {
+        $enum = StageEnum::tryFrom($fixture->stage->name);
+
+        $nextStageEnum = $enum->next();
+        if (!$nextStageEnum) {
+            return;
+        }
+
+        $fixture->stage_id = $nextStageEnum->stage()->id;
+        $fixture->save();
+
+        $nextStageEnum->service()->generate($fixture);
     }
 }
