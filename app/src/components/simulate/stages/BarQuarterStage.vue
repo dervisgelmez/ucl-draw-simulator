@@ -5,7 +5,7 @@
     class="flex items-center gap-1 text-indigo-600 cursor-pointer text-base border-gray-200 pr-3"
   >
     <Icon icon="mdi:play" />
-    Simulate Round <b>Leg {{ fixture.week - 6 }}</b>
+    Simulate Quarter <b>Leg {{ fixture.week - 8 }}</b>
   </div>
   <div
     @click="simulateRound"
@@ -13,7 +13,7 @@
     class="flex items-center gap-1 text-indigo-600 cursor-pointer text-base border-gray-200 pr-3"
   >
     <Icon icon="mdi:play" />
-    Simulate Round 16
+    Simulate Quarter Final
   </div>
 </template>
 
@@ -29,17 +29,17 @@ const { request } = useApiRequest()
 const { resetFixtureMatch, fetchFixtureMatches } = useFixtureStore()
 
 const applySimulate = async () => {
-  resetFixtureMatch(FixtureStages.ROUND)
-  await fetchFixtureMatches(FixtureStages.ROUND)
+  resetFixtureMatch(FixtureStages.QUARTER)
+  await fetchFixtureMatches(FixtureStages.QUARTER)
 }
 
 const simulateLegs = async () => {
-  await request(`/fixtures/${props.fixture.id}/simulate/round-legs`, { method: 'POST' })
+  await request(`/fixtures/${props.fixture.id}/simulate/quarter-legs`, { method: 'POST' })
   await applySimulate()
 }
 
 const simulateRound = async () => {
-  await request(`/fixtures/${props.fixture.id}/simulate/rounds`, { method: 'POST' })
+  await request(`/fixtures/${props.fixture.id}/simulate/quarters`, { method: 'POST' })
   await applySimulate()
 }
 </script>

@@ -26,6 +26,9 @@ import { computed, markRaw } from 'vue'
 import { useFixtureStore } from '@/stores/fixture.store.ts'
 import BarGroupStage from '@/components/simulate/stages/BarGroupStage.vue'
 import BarRoundStage from '@/components/simulate/stages/BarRoundStage.vue'
+import BarQuarterStage from '@/components/simulate/stages/BarQuarterStage.vue'
+import BarSemiStage from '@/components/simulate/stages/BarSemiStage.vue'
+import BarFinalStage from '@/components/simulate/stages/BarFinalStage.vue'
 
 const { resetFixture } = useFixtureStore()
 
@@ -38,6 +41,9 @@ const props = defineProps<ISimulateBarProps>()
 const stageComponents = markRaw({
   [FixtureStages.GROUP]: BarGroupStage,
   [FixtureStages.ROUND]: BarRoundStage,
+  [FixtureStages.QUARTER]: BarQuarterStage,
+  [FixtureStages.SEMI]: BarSemiStage,
+  [FixtureStages.FINAL]: BarFinalStage
 })
 
 const getComponentsByStage = computed(() => {
