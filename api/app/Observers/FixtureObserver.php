@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Fixture;
 use App\Models\FixtureGroup;
+use App\Models\FixtureMatch;
 
 class FixtureObserver
 {
@@ -13,6 +14,7 @@ class FixtureObserver
     public function created(Fixture $fixture): void
     {
         FixtureGroup::query()->delete();
+        FixtureMatch::query()->delete();
     }
 
     /**

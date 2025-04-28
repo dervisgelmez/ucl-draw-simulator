@@ -21,7 +21,7 @@ enum StageEnum: string
         };
     }
 
-    public function order(): bool
+    public function order(): int
     {
         return match ($this) {
             self::GROUP_STAGE => 1,

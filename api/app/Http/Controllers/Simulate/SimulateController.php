@@ -7,28 +7,13 @@ use App\Supports\Response;
 use App\Enums\ResponseStatusEnum;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Services\Simulate\SimulateService;
+use App\Http\Requests\SimulateRequest;
 
 class SimulateController extends Controller
 {
-    /**
-     * Simulate all fixture
-     */
-    public function fixture(Fixture $fixture, SimulateService $simulateService): JsonResponse
+    public function simulate(SimulateRequest $request, Fixture $fixture): JsonResponse
     {
-        $simulateService->fixture($fixture);
-
-        return Response::success(
-            status: ResponseStatusEnum::NO_CONTENT
-        );
-    }
-
-    /**
-     * Simulate current week
-     */
-    public function week(Fixture $fixture, SimulateService $simulateService): JsonResponse
-    {
-        $simulateService->week($fixture);
+        $request->strategy()->handle($fixture);
 
         return Response::success(
             status: ResponseStatusEnum::NO_CONTENT
