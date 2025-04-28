@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="order-2 lg:order-1" v-if="fixtureMatches.length">
+    <div class="order-2 lg:order-1" v-if="groupMatches.length">
       <h4 class="pb-10 text-gray-700 text-2xl">Matches</h4>
       <div>
         <n-tabs v-model:value="activeTab" type="line" animated>
@@ -63,12 +63,13 @@
 </template>
 
 <script setup lang="ts">
-import type {
-  FixtureGroupTeam,
-  FixtureMatch,
-  IFixtureStageComponentsProps,
+import {
+  type FixtureGroupTeam,
+  type FixtureMatch,
+  FixtureStages,
+  type IFixtureStageComponentsProps,
 } from '@/types/fixture.ts'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, type Ref, ref, watch } from 'vue'
 import { NTabs, NTabPane } from 'naive-ui'
 import { useFixtureStore } from '@/stores/fixture.store.ts'
 import { storeToRefs } from 'pinia'
@@ -80,8 +81,12 @@ const activeTab = ref(`Week ${props.fixture.week}`)
 const { fetchFixtureGroups, fetchFixtureMatches } = useFixtureStore()
 const { fixtureGroups, fixtureMatches } = storeToRefs(useFixtureStore())
 
+const groupMatches: Ref<Array<FixtureMatch>> = computed(() => {
+  return fixtureMatches.value[FixtureStages.GROUP]
+})
+
 const getMatchesByWeekly = computed(() => {
-  return fixtureMatches.value.reduce((acc: Record<number, FixtureMatch[]>, match: FixtureMatch) => {
+  return groupMatches.value.reduce((acc: Record<number, FixtureMatch[]>, match: FixtureMatch) => {
     const week = match.week
     if (!acc[week]) {
       acc[week] = []
@@ -100,9 +105,12 @@ const getSortedTeams = (teams: FixtureGroupTeam[]) => {
   })
 }
 
-watch(() => props.fixture.week, (newWeek) => {
-  activeTab.value = `Week ${newWeek}`
-})
+watch(
+  () => props.fixture.week,
+  (newWeek) => {
+    activeTab.value = `Week ${newWeek}`
+  },
+)
 
 onMounted(async () => {
   await fetchFixtureGroups()

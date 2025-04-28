@@ -1,13 +1,24 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useApiRequest } from '@/composables/useApiRequest.ts'
-import type { Fixture, FixtureGroup, FixtureMatch } from '@/types/fixture.ts'
-import type { Team } from '@/types/teams.ts'
+import {
+  type Fixture,
+  type FixtureGroup,
+  type FixtureMatch,
+  FixtureStages,
+} from '@/types/fixture.ts'
 
 export const useFixtureStore = defineStore('fixture', () => {
   const fixture = ref<Fixture | null>(null)
   const fixtureGroups = ref<Array<FixtureGroup>>([] as FixtureGroup[])
-  const fixtureMatches = ref<Array<FixtureMatch>>([] as FixtureMatch[])
+
+  const fixtureMatches = ref<Record<FixtureStages, FixtureMatch[]>>({
+    [FixtureStages.GROUP]: [],
+    [FixtureStages.ROUND]: [],
+    [FixtureStages.QUARTER]: [],
+    [FixtureStages.SEMI]: [],
+    [FixtureStages.FINAL]: [],
+  })
 
   const fetchFixture = async () => {
     if (fixture.value) {
@@ -28,17 +39,22 @@ export const useFixtureStore = defineStore('fixture', () => {
       return []
     }
 
-    const { data } = await useApiRequest().request(`/fixtures/${fixture.value?.id}/groups`, { method: 'GET' })
+    const { data } = await useApiRequest().request(`/fixtures/${fixture.value?.id}/groups`, {
+      method: 'GET',
+    })
     fixtureGroups.value = (data.value ?? []) as FixtureGroup[]
   }
 
-  const fetchFixtureMatches = async () => {
-    if (fixtureMatches.value.length > 0) {
+  const fetchFixtureMatches = async (stage: FixtureStages = FixtureStages.GROUP) => {
+    if (fixtureMatches.value[stage].length > 0) {
       return []
     }
 
-    const { data } = await useApiRequest().request(`/fixtures/${fixture.value?.id}/matches`, { method: 'GET' })
-    fixtureMatches.value = (data.value ?? []) as FixtureMatch[]
+    const { data } = await useApiRequest().request(
+      `/fixtures/${fixture.value?.id}/matches?stage=${stage}`,
+      { method: 'GET' },
+    )
+    fixtureMatches.value[stage] = (data.value ?? []) as FixtureMatch[]
   }
 
   const resetFixture = async () => {
@@ -48,13 +64,23 @@ export const useFixtureStore = defineStore('fixture', () => {
 
   const resetDashboard = () => {
     fixtureGroups.value = []
-    fixtureMatches.value = []
+    resetFixtureMatches()
   }
 
   const resetStore = () => {
     fixture.value = null
     fixtureGroups.value = []
-    fixtureMatches.value = []
+    resetFixtureMatches()
+  }
+
+  const resetFixtureMatches = () => {
+    fixtureMatches.value = {
+      [FixtureStages.GROUP]: [],
+      [FixtureStages.ROUND]: [],
+      [FixtureStages.QUARTER]: [],
+      [FixtureStages.SEMI]: [],
+      [FixtureStages.FINAL]: [],
+    }
   }
 
   return {
@@ -66,6 +92,6 @@ export const useFixtureStore = defineStore('fixture', () => {
     fetchFixtureGroups,
     fetchFixtureMatches,
     resetFixture,
-    resetDashboard
+    resetDashboard,
   }
 })
