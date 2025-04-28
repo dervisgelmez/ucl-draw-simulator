@@ -2,12 +2,15 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\SimulateStrategiesEnum;
+use App\Enums\Simulate\SimulateStrategiesEnum;
+use App\Services\Simulate\AbstractSimulateStrategy;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class SimulateRequest extends FormRequest
 {
+    protected array $strategies = [];
+
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -25,8 +28,12 @@ class SimulateRequest extends FormRequest
         ];
     }
 
-    public function getStrategy(): string
+    public function strategy(): AbstractSimulateStrategy
     {
-        return $this->validated('strategy');
+        $enum = SimulateStrategiesEnum::tryFrom(
+            $this->validated('strategy')
+        );
+
+        return app($enum->strategy());
     }
 }
