@@ -8,23 +8,25 @@ use Illuminate\Validation\Rule;
 
 class SimulateRequest extends FormRequest
 {
-    public function authorize(): bool
+    protected function prepareForValidation(): void
     {
-        return true;
+        $this->merge([
+            'strategy' => $this->route('strategy')
+        ]);
     }
 
     public function rules(): array
     {
         return [
-            'stage' => [
+            'strategy' => [
                 'required',
-                Rule::in(SimulateStrategiesEnum::values())
+                Rule::enum(SimulateStrategiesEnum::class)
             ],
         ];
     }
 
-    public function getStrategy(): SimulateStrategiesEnum
+    public function getStrategy(): string
     {
-        return SimulateStrategiesEnum::from($this->route('stage'));
+        return $this->validated('strategy');
     }
 }

@@ -12,9 +12,9 @@ use App\Services\Simulate\SimulateService;
 
 class SimulateController extends Controller
 {
-    public function simulate(Fixture $fixture, SimulateRequest $request, SimulateService $simulateService): JsonResponse
+    public function simulate(SimulateRequest $request, Fixture $fixture, SimulateService $simulateService): JsonResponse
     {
-        $simulateService->simulate($fixture, $request->getStrategy());
+        $simulateService->simulate($fixture, $request);
 
         return Response::success(
             status: ResponseStatusEnum::NO_CONTENT
