@@ -33,6 +33,19 @@ class Fixture extends Model
         return $this->hasMany(FixtureMatch::class);
     }
 
+    public function waitingMatches(): HasMany
+    {
+        return $this->hasMany(FixtureMatch::class)
+            ->whereNull('completed_at');
+    }
+
+    public function weeklyWaitingMatches(): HasMany
+    {
+        return $this->hasMany(FixtureMatch::class)
+            ->whereNull('completed_at')
+            ->where('week', $this->week);
+    }
+
     public static function findOneByActive()
     {
         return Fixture::query()
