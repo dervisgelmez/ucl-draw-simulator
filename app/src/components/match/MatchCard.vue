@@ -12,9 +12,20 @@
       <span class="text-xs font-bold">{{ match.homeTeam.name }}</span>
     </div>
     <div class="w-full text-center">
-      <div v-if="match.completedAt">
-        <span>{{ match.homeTeamScore }}</span>
-        <span>{{ match.awayTeamScore }}</span>
+      <div class="flex justify-evenly gap-2" v-if="match.completedAt">
+        <span
+          class="rounded-full px-2 font-bold text-xl"
+          :class="getScoreClass(match.homeTeamScore, match.awayTeamScore)"
+        >
+          {{ match.homeTeamScore }}
+        </span>
+
+        <span
+          class="rounded-full px-2 font-bold text-xl"
+          :class="getScoreClass(match.awayTeamScore, match.homeTeamScore)"
+        >
+          {{ match.awayTeamScore }}
+        </span>
       </div>
       <div v-else>
         <span class="text-xs text-gray-500">{{ match.date }}</span>
@@ -38,6 +49,19 @@ import type { FixtureMatch } from '@/types/fixture.ts'
 
 interface IMatchCardProps {
   match: FixtureMatch
+}
+
+const getScoreClass = (
+  homeScore: number | null | undefined,
+  awayScore: number | null | undefined,
+) => {
+  const score = homeScore ?? 0
+  const opponent = awayScore ?? 0
+
+  if (score > opponent) {
+    return 'text-indigo-500'
+  }
+  return 'text-gray-400'
 }
 
 defineProps<IMatchCardProps>()
