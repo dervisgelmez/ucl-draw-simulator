@@ -13,9 +13,5 @@ Route::apiResource('/fixtures', FixtureController::class)->only(['index', 'store
 Route::prefix('/fixtures/{fixture}')->group(function () {
     Route::get('/groups', [FixtureGroupController::class, 'index'])->name('fixtures.groups.list');
     Route::get('/matches', [FixtureMatchesController::class, 'index'])->name('fixtures.groups.list');
-});
-
-Route::prefix('/simulate/{fixture}')->group(function () {
-    Route::post('/', [SimulateController::class, 'fixture'])->name('simulate.fixtures.all');
-    Route::post('/weeks', [SimulateController::class, 'week'])->name('simulate.fixtures.week');
+    Route::post('/simulate/{type}', [SimulateController::class, 'simulate'])->name('fixtures.simulate');
 });

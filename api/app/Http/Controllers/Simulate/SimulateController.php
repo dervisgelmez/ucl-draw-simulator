@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Simulate;
 
+use App\Http\Requests\SimulateRequest;
 use App\Models\Fixture;
 use App\Supports\Response;
 use App\Enums\ResponseStatusEnum;
@@ -11,24 +12,9 @@ use App\Services\Simulate\SimulateService;
 
 class SimulateController extends Controller
 {
-    /**
-     * Simulate all fixture
-     */
-    public function fixture(Fixture $fixture, SimulateService $simulateService): JsonResponse
+    public function simulate(Fixture $fixture, SimulateRequest $request, SimulateService $simulateService): JsonResponse
     {
-        $simulateService->fixture($fixture);
-
-        return Response::success(
-            status: ResponseStatusEnum::NO_CONTENT
-        );
-    }
-
-    /**
-     * Simulate current week
-     */
-    public function week(Fixture $fixture, SimulateService $simulateService): JsonResponse
-    {
-        $simulateService->week($fixture);
+        $simulateService->simulate($fixture, $request->getStrategy());
 
         return Response::success(
             status: ResponseStatusEnum::NO_CONTENT
