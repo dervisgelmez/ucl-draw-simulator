@@ -12,14 +12,16 @@ class SimulateWeekly extends AbstractSimulateStrategy
     {
         $matches = $fixture->weeklyWaitingMatches()->get();
         foreach ($matches as $match) {
-            $this->handleMatch($match);
+            $this->simulate($match);
+        }
+
+        if ($fixture->week === 6) {
+            $fixture->stage_id = Stage::findNextStageId($fixture->stage);
+            $fixture->save();
+            return;
         }
 
         $fixture->week++;
-        if ($fixture->week === 6) {
-            $fixture->stage_id = Stage::findNextStageId($fixture->stage);
-        }
-
         $fixture->save();
     }
 }

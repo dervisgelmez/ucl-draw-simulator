@@ -12,7 +12,7 @@ class SimulateGroupStage extends AbstractSimulateStrategy
     {
         $matches = $fixture->waitingMatches()->get();
         foreach ($matches as $match) {
-            $this->handleMatch($match);
+            $this->simulate($match);
         }
 
         $fixture->week = 6;

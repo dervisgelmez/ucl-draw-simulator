@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\SimulatePositionsEnum;
+use App\Enums\Simulate\SimulateEventTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignUuid('fixture_match_id')->constrained('fixture_matches')->cascadeOnDelete();
             $table->foreignUuid('team_id')->constrained('teams');
             $table->tinyInteger('minute');
-            $table->enum('type', SimulatePositionsEnum::values());
+            $table->enum('type', SimulateEventTypeEnum::values());
             $table->timestamps();
         });
     }
