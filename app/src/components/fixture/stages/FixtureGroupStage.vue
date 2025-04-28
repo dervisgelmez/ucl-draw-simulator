@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col xl:flex-row gap-10">
     <div class="w-full order-1 lg:order-2" v-if="fixtureGroups.length">
-      <h4 class="pb-10 text-gray-700 text-2xl">Groups</h4>
+      <h4 v-if="!props.clear" class="pb-10 text-gray-700 text-2xl">Groups</h4>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div :key="group.id" v-for="group in fixtureGroups">
           <div class="overflow-x-auto border border-gray-200 rounded-lg overflow-hidden">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="order-2 lg:order-1" v-if="groupMatches.length">
-      <h4 class="pb-10 text-gray-700 text-2xl">Matches</h4>
+      <h4 v-if="!props.clear" class="pb-10 text-gray-700 text-2xl">Matches</h4>
       <div>
         <n-tabs v-model:value="activeTab" type="line" animated>
           <n-tab-pane
@@ -70,14 +70,16 @@ import {
   type IFixtureStageComponentsProps,
 } from '@/types/fixture.ts'
 import { computed, onMounted, type Ref, ref, watch } from 'vue'
-import { NTabs, NTabPane } from 'naive-ui'
+import { NTabs, NTabPane, NCollapse } from 'naive-ui'
 import { useFixtureStore } from '@/stores/fixture.store.ts'
 import { storeToRefs } from 'pinia'
 import MatchCard from '@/components/match/MatchCard.vue'
 
 const props = defineProps<IFixtureStageComponentsProps>()
 
-const activeTab = ref(`Week ${props.fixture.week}`)
+const normalizeWeek = (week: number) => Math.min(week, 6)
+const activeTab = ref(`Week ${normalizeWeek(props.fixture.week)}`)
+
 const { fetchFixtureGroups, fetchFixtureMatches } = useFixtureStore()
 const { fixtureGroups, fixtureMatches } = storeToRefs(useFixtureStore())
 
@@ -108,7 +110,7 @@ const getSortedTeams = (teams: FixtureGroupTeam[]) => {
 watch(
   () => props.fixture.week,
   (newWeek) => {
-    activeTab.value = `Week ${newWeek}`
+    activeTab.value = `Week ${normalizeWeek(newWeek)}`
   },
 )
 
