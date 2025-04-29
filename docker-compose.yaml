@@ -4,20 +4,20 @@ services:
   php:
     build:
       context: ./docker/php
-    container_name: insider-php
+    container_name: ucl-draw-php
     restart: unless-stopped
     working_dir: /var/www
     volumes:
       - ./api:/var/www
     networks:
-      - insider-network
+      - ucl-draw-network
     depends_on:
       - postgres
-      - redis
+
 
   nginx:
     image: nginx:latest
-    container_name: insider-nginx
+    container_name: ucl-draw-nginx
     restart: unless-stopped
     ports:
       - "8000:80"
@@ -27,11 +27,11 @@ services:
     depends_on:
       - php
     networks:
-      - insider-network
+      - ucl-draw-network
 
   node:
     image: node:20
-    container_name: insider-node
+    container_name: ucl-draw-node
     working_dir: /app
     volumes:
       - ./app:/app
@@ -41,34 +41,25 @@ services:
     environment:
       - HOST=0.0.0.0
     networks:
-      - insider-network
+      - ucl-draw-network
 
   postgres:
     image: postgres:15
-    container_name: insider-postgres
+    container_name: ucl-draw-postgres
     restart: unless-stopped
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: insider
-      POSTGRES_PASSWORD: insider
-      POSTGRES_DB: insider_db
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: laravel12
+      POSTGRES_DB: ucldrawer_db
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
-      - insider-network
-
-  redis:
-    image: redis:latest
-    container_name: insider-redis
-    restart: unless-stopped
-    ports:
-      - "6379:6379"
-    networks:
-      - insider-network
+      - ucl-draw-network
 
 networks:
-  insider-network:
+  ucl-draw-network:
     driver: bridge
 
 volumes:

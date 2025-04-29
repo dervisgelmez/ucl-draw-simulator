@@ -14,7 +14,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://insider-nginx:80',
+        target: 'http://ucl-draw-nginx:80',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '/api'),
       },
