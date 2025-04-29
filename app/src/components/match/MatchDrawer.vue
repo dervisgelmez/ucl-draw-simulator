@@ -8,14 +8,27 @@
         <div>
           <n-timeline size="large" item-placement="right">
             <n-timeline-item
+              type="info"
+              title="🏟️ 0'"
+              content="Match Started"
+            />
+
+            <n-timeline-item
               v-for="(log, index) in match.logs"
               :key="index"
               :type="getLogTypeColor(log.type)"
-              :title="`${log.minute.toString()}''`"
+              :title="`${getEmoji(log.type)} ${log.minute}''`"
               :content="getLogContent(log.type)"
+            />
+
+            <n-timeline-item
+              type="success"
+              title="🏁 90'"
+              content="Match Ended"
             />
           </n-timeline>
         </div>
+
       </div>
     </n-drawer-content>
   </n-drawer>
@@ -83,6 +96,33 @@ const getLogContent = (type: string) => {
       return 'Pass completed'
     default:
       return 'Event'
+  }
+}
+
+const getEmoji = (type: string) => {
+  switch (type) {
+    case 'goal':
+    case 'penalty_goal':
+    case 'free_kick_goal':
+      return '🥅'
+    case 'penalty':
+    case 'free_kick':
+      return '🎯'
+    case 'penalty_miss':
+    case 'free_kick_miss':
+      return '❌'
+    case 'yellow_card':
+      return '🟨'
+    case 'red_card':
+      return '🟥'
+    case 'card':
+      return '🃏'
+    case 'injury':
+      return '🤕'
+    case 'pass':
+      return '➡️'
+    default:
+      return '⚽️'
   }
 }
 </script>

@@ -19,8 +19,8 @@
         >
           {{ match.homeTeamScore }}
         </span>
-        <span v-if="match.completedAt && detail" @click="fetchMatchDetail" class="cursor-pointer text-gray-500">
-          <Icon icon="carbon:result" />
+        <span v-if="match.completedAt && detail" @click="fetchMatchDetail" class="cursor-pointer text-gray-300">
+          <Icon icon="mingcute:live-fill" height="24" />
         </span>
         <span
           class="rounded-full px-2 font-bold text-xl"
