@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AppLayout from '@/layouts/AppLayout.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
-import TeamsView from '@/views/teams/TeamsView.vue'
+import TeamsView from '@/views/TeamsView.vue'
 
 const routes = [
   {

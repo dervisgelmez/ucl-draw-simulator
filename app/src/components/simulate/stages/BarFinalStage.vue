@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="!finalMatch.completedAt"
+    v-if="finalMatch && !finalMatch.completedAt"
     @click="simulateFinal"
     type="button"
     class="flex items-center gap-1 text-indigo-600 cursor-pointer text-base border-gray-200 pr-3"
@@ -17,7 +17,7 @@ import { useFixtureStore } from '@/stores/fixture.store.ts'
 import {
   type FixtureMatch,
   FixtureStages,
-  type IFixtureStageComponentsProps
+  type IFixtureStageComponentsProps,
 } from '@/types/fixture.ts'
 import { storeToRefs } from 'pinia'
 import { computed, type Ref } from 'vue'

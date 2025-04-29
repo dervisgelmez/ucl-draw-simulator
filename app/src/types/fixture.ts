@@ -48,6 +48,28 @@ export interface FixtureMatch {
   awayTeamScore: number | null;
   homeTeam: Team;
   awayTeam: Team;
+  logs?: FixtureMatchLog[];
+}
+
+export interface FixtureMatchLog {
+  minute: number
+  team_id: string
+  type: FixtureMatchLogType
+}
+
+export enum FixtureMatchLogType {
+  GOAL = 'goal',
+  PENALTY = 'penalty',
+  PENALTY_GOAL = 'penalty_goal',
+  PENALTY_MISS = 'penalty_miss',
+  FREE_KICK = 'free_kick',
+  FREE_KICK_GOAL = 'free_kick_goal',
+  FREE_KICK_MISS = 'free_kick_miss',
+  YELLOW_CARD = 'yellow_card',
+  RED_CARD = 'red_card',
+  CARD = 'card',
+  INJURY = 'injury',
+  PASS = 'pass',
 }
 
 export interface IFixtureStageComponentsProps {

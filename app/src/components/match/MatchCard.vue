@@ -12,14 +12,16 @@
       <span class="text-xs font-bold">{{ match.homeTeam.name }}</span>
     </div>
     <div class="w-full text-center">
-      <div class="flex justify-evenly gap-2" v-if="match.completedAt">
+      <div class="flex justify-evenly items-center gap-2" v-if="match.completedAt">
         <span
           class="rounded-full px-2 font-bold text-xl"
           :class="getScoreClass(match.homeTeamScore, match.awayTeamScore)"
         >
           {{ match.homeTeamScore }}
         </span>
-
+        <span v-if="match.completedAt && detail" @click="fetchMatchDetail" class="cursor-pointer text-gray-500">
+          <Icon icon="carbon:result" />
+        </span>
         <span
           class="rounded-full px-2 font-bold text-xl"
           :class="getScoreClass(match.awayTeamScore, match.homeTeamScore)"
@@ -46,9 +48,22 @@
 
 <script setup lang="ts">
 import type { FixtureMatch } from '@/types/fixture.ts'
+import { Icon } from '@iconify/vue'
+import { useMatchStore } from '@/stores/matc.store.ts'
+
+const { fetchMatch } = useMatchStore()
 
 interface IMatchCardProps {
   match: FixtureMatch
+  detail?: boolean
+}
+
+const props = withDefaults(defineProps<IMatchCardProps>(), {
+  detail: true,
+})
+
+const fetchMatchDetail = async () => {
+  await fetchMatch(props.match.id)
 }
 
 const getScoreClass = (
@@ -63,6 +78,4 @@ const getScoreClass = (
   }
   return 'text-gray-400'
 }
-
-defineProps<IMatchCardProps>()
 </script>

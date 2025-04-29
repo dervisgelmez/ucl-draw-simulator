@@ -8,6 +8,8 @@
       :is="getComponentsByStage"
       :fixture="fixture"
     />
+
+    <MatchDrawer />
   </div>
 </template>
 
@@ -20,6 +22,7 @@ import FixtureRoundStage from '@/components/fixture/stages/FixtureRoundStage.vue
 import FixtureQuarterStage from '@/components/fixture/stages/FixtureQuarterStage.vue'
 import FixtureSemiStage from '@/components/fixture/stages/FixtureSemiStage.vue'
 import FixtureFinalStage from '@/components/fixture/stages/FixtureFinalStage.vue'
+import MatchDrawer from '@/components/match/MatchDrawer.vue'
 
 interface IFixtureDashboardProps {
   fixture: Fixture
