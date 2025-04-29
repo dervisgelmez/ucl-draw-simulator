@@ -32,6 +32,9 @@ class FixtureMatchResource extends JsonResource
             'awayTeam' => $this->whenLoaded('awayTeam', function () {
                 return $this->awayTeam ? TeamResource::make($this->awayTeam) : null;
             }),
+            'logs' => $this->whenLoaded('logs', function () {
+                return $this->logs ?? null;
+            }),
         ];
     }
 }

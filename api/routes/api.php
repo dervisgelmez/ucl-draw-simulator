@@ -24,6 +24,8 @@ Route::prefix('/fixtures/{fixture}')->group(function () {
         ->name('fixtures.simulate');
 });
 
+Route::get('/matches/{match}', [FixtureMatchesController::class, 'show'])->name('matches.show');
+
 
 Route::get('/test', function () {
     StageEnum::SEMI_FINAL->service()->generate(

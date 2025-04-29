@@ -26,4 +26,20 @@ class FixtureMatchesController extends Controller
             FixtureMatchResource::collection($matches)
         );
     }
+
+    public function show(FixtureMatch $match): JsonResponse
+    {
+        $match->load([
+            'stage',
+            'homeTeam',
+            'awayTeam',
+            'logs' => function ($query) {
+                $query->orderBy('minute');
+            },
+        ]);
+
+        return Response::success(
+            FixtureMatchResource::make($match)
+        );
+    }
 }
