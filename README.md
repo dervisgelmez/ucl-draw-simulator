@@ -41,7 +41,7 @@ docker exec -it ucl-draw-php bash -c "composer install"
 ### 5. Run Migrations and Seed the Database
 
 ```bash
-docker exec -it ucl-draw-php bash -c "php artisan migrate:seed"
+docker exec -it ucl-draw-php bash -c "php artisan migrate --seed"
 ```
 
 ## Access the Project
